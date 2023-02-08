@@ -1,7 +1,7 @@
 {
-    "name": "k3rnel/omnipay-arca",
+    "name": "arm092/omnipay-ameriabank",
     "type": "library",
-    "description": "Arca gateway for Omnipay payment processing library",
+    "description": "AmeriaBank gateway for Omnipay payment processing library",
     "keywords": [
         "gateway",
         "merchant",
@@ -9,19 +9,22 @@
         "pay",
         "payment",
         "arca",
+        "ameria",
+        "ameria-bank",
+        "ameria bank",
         "purchase"
     ],
-    "homepage": "https://github.com/k3rnel/omnipay-arca",
+    "homepage": "https://github.com/arm092/omnipay-ameriabank",
     "license": "MIT",
     "authors": [
         {
-            "name": "Poghos Boyajyan",
-            "email": "poghosboyajyan@gmail.com"
+            "name": "Apricode Team",
+            "email": "arman.khachatryan@apricode.am"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\Arca\\": "src/"
+            "Omnipay\\Ameria\\": "src/"
         }
     },
     "require": {
