@@ -1,11 +1,11 @@
-# Omnipay: Arca
+# Omnipay: AmeriaBank
 
-**Arca driver for the Omnipay Laravel payment processing library**
+**AmeriaBank driver for the Omnipay Laravel payment processing library**
 
-[![Latest Stable Version](https://poser.pugx.org/k3rnel/omnipay-arca/version.png)](https://packagist.org/packages/k3rnel/omnipay-arca)
-[![Total Downloads](https://poser.pugx.org/k3rnel/omnipay-arca/d/total.png)](https://packagist.org/packages/k3rnel/omnipay-arca)
+[![Latest Stable Version](https://poser.pugx.org/arm092/omnipay-ameriabank/version.png)](https://packagist.org/packages/arm092/omnipay-ameriabank)
+[![Total Downloads](https://poser.pugx.org/arm092/omnipay-ameriabank/d/total.png)](https://packagist.org/packages/arm092/omnipay-ameriabank)
 
-[Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
+[Omnipay](https://github.com/thephpleague/omnipay) is a framework-agnostic, multi-gateway payment
 processing library for PHP 5.5+. This package implements Arca support for Omnipay.
 
 ## Installation
@@ -16,7 +16,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "k3rnel/omnipay-arca": "dev-master"
+        "arm092/omnipay-ameriabank": "1.0.0"
     }
 }
 ```
@@ -27,7 +27,7 @@ And run composer to update your dependencies:
 
 Or you can simply run
 
-    composer require k3rnel/omnipay-arca
+    composer require arm092/omnipay-ameriabank
 
 ## Basic Usage
 
@@ -37,21 +37,21 @@ Or you can simply run
     use Omnipay\Omnipay;
 ```
 
-2. Initialize Arca gateway:
+2. Initialize Ameria gateway:
 
 ```php
 
-    $gateway = Omnipay::create('Arca');
-    $gateway->setUsername(env('ARCA_USERNAME'));
-    $gateway->setPassword(env('ARCA_PASSWORD'));
-    $gateway->setReturnUrl(env('ARCA_RETURN_URL')); // Return url, that should be point to your arca webhook route
+    $gateway = Omnipay::create('Ameria');
+    $gateway->setUsername(env('AMERIA_USERNAME'));
+    $gateway->setPassword(env('AMERIA_PASSWORD'));
+    $gateway->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
     $gateway->setLanguage(\App::getLocale()); // Language
     $gateway->setAmount(10); // Amount to charge
     $gateway->setTransactionId(XXXX); // Transaction ID from your system
 
 ```
 
-3. Call purchase, it will automatically redirect to Arca's hosted page
+3. Call purchase, it will automatically redirect to AmeriaBank's hosted page
 
 ```php
 
@@ -60,13 +60,13 @@ Or you can simply run
 
 ```
 
-4. Create a webhook controller to handle the callback request at your `ARCA_RESULT_URL` and catch the webhook as follows
+4. Create a webhook controller to handle the callback request at your `AMERIA_RESULT_URL` and catch the webhook as follows
 
 ```php
 
-    $gateway = Omnipay::create('Arca');
-    $gateway->setUsername(env('ARCA_USERNAME'));
-    $gateway->setPassword(env('ARCA_PASSWORD'));
+    $gateway = Omnipay::create('Ameria');
+    $gateway->setUsername(env('AMERIA_USERNAME'));
+    $gateway->setPassword(env('AMERIA_PASSWORD'));
     
     $purchase = $gateway->completePurchase()->send();
     
@@ -94,5 +94,5 @@ If you want to keep up to date with release anouncements, discuss ideas for the 
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
 you can subscribe to.
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/k3rnel/omnipay-arca/issues),
+If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/arm092/omnipay-ameria/issues),
 or better yet, fork the library and submit a pull request.
