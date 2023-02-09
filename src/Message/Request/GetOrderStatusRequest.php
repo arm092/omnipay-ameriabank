@@ -1,8 +1,6 @@
 <?php
 
-namespace Omnipay\Arca\Message\Request;
-
-use Omnipay\Arca\Message\AbstractRequest;
+namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class GetOrderStatusRequest
