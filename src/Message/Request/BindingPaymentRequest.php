@@ -1,8 +1,8 @@
 <?php
 
-namespace Omnipay\Arca\Message\Request;
+namespace Omnipay\Ameria\Message\Request;
 
-use Omnipay\Arca\Message\Response\BindingPaymentResponse;
+use Omnipay\Ameria\Message\Response\BindingPaymentResponse;
 
 /**
  * @package Omnipay\Arca\Message\Request

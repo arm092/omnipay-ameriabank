@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Arca\Message\Request;
+namespace Omnipay\Ameria\Message\Request;
 
 abstract class AbstractBindingAwareRequest extends AbstractRequest
 {

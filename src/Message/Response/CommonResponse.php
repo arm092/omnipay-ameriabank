@@ -1,13 +1,13 @@
 <?php
 
-namespace Omnipay\Arca\Message\Response;
+namespace Omnipay\Ameria\Message\Response;
 
 /**
  * Arca Response.
  *
  * This is the response class for all Arca requests.
  *
- * @see \Omnipay\Arca\Gateway
+ * @see \Omnipay\Ameria\Gateway
  */
 class CommonResponse extends AbstractResponse
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Omnipay\Arca\Message\Request;
+namespace Omnipay\Ameria\Message\Request;
 
-use Omnipay\Arca\Message\Response\CommonResponse;
-use \Omnipay\Common\Message\AbstractRequest as CommonAbstractRequest;
+use Omnipay\Ameria\Message\Response\CommonResponse;
+use Omnipay\Common\Message\AbstractRequest as CommonAbstractRequest;
 use Omnipay\Common\Message\ResponseInterface;
 
 /**

@@ -1,17 +1,17 @@
 <?php
 
-namespace Omnipay\Arca;
+namespace Omnipay\Ameria;
 
-use Omnipay\Arca\Message\Request\BindingPaymentRequest;
-use Omnipay\Arca\Message\Request\DepositRequest;
-use Omnipay\Arca\Message\Request\GetBindingsRequest;
-use Omnipay\Arca\Message\Request\GetOrderStatusExtendedRequest;
-use Omnipay\Arca\Message\Request\GetOrderStatusRequest;
-use Omnipay\Arca\Message\Request\RefundRequest;
-use Omnipay\Arca\Message\Request\RegisterPreAuthRequest;
-use Omnipay\Arca\Message\Request\RegisterRequest;
-use Omnipay\Arca\Message\Request\ReverseRequest;
-use Omnipay\Arca\Message\Request\VerifyEnrollmentRequest;
+use Omnipay\Ameria\Message\Request\BindingPaymentRequest;
+use Omnipay\Ameria\Message\Request\DepositRequest;
+use Omnipay\Ameria\Message\Request\GetBindingsRequest;
+use Omnipay\Ameria\Message\Request\GetPaymentDetailsRequest;
+use Omnipay\Ameria\Message\Request\GetOrderStatusRequest;
+use Omnipay\Ameria\Message\Request\RefundRequest;
+use Omnipay\Ameria\Message\Request\RegisterPreAuthRequest;
+use Omnipay\Ameria\Message\Request\RegisterRequest;
+use Omnipay\Ameria\Message\Request\ReverseRequest;
+use Omnipay\Ameria\Message\Request\VerifyEnrollmentRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Common\Message\NotificationInterface;
