@@ -11,14 +11,33 @@ namespace Omnipay\Ameria\Message\Response;
  */
 class CommonResponse extends AbstractResponse
 {
+    protected string $endpoint = 'https://servicestest.ameriabank.am/VPOS';
+
     /**
      * Get response redirect url
      *
      * @return string
      */
-    public function getRedirectUrl() : string
+    public function getRedirectUrl(): string
     {
-        return $this->data['formUrl'];
+        return $this->endpoint.'/Pay?'.http_build_query([
+                'id'   => $this->data['PaymentId'],
+                'lang' => $this->data['Language'],
+            ]);
+    }
+
+    /**
+     * Set interface language
+     *
+     * @param  string  $value
+     *
+     * @return AbstractResponse
+     */
+    public function setLanguage(string $value): AbstractResponse
+    {
+        $this->data['Language'] = $value;
+
+        return $this;
     }
 
     /**
@@ -26,10 +45,13 @@ class CommonResponse extends AbstractResponse
      *
      * @return string|null
      */
-    public function getTransactionReference() : ?string
+    public function getTransactionReference(): ?string
     {
-        if (isset($this->data['orderId'])) {
-            return $this->data['orderId'];
+        if (isset($this->data['orderID'])) {
+            return $this->data['orderID'];
+        }
+        if (isset($this->data['OrderID'])) {
+            return $this->data['OrderID'];
         }
 
         if (isset($this->orderId)) {
@@ -44,14 +66,10 @@ class CommonResponse extends AbstractResponse
      *
      * @return mixed
      */
-    public function getOrderNumberReference() : mixed
+    public function getOrderNumberReference(): mixed
     {
-        if (isset($this->data['OrderNumber'])) {
-            return $this->data['OrderNumber'];
-        }
-
-        if (isset($this->data['orderNumber'])) {
-            return $this->data['orderNumber'];
+        if (isset($this->data['MDOrderID'])) {
+            return $this->data['MDOrderID'];
         }
 
         return null;
@@ -64,20 +82,19 @@ class CommonResponse extends AbstractResponse
      */
     public function getOrderStatus()
     {
-        if (isset($this->data['orderStatus'])) {
-            return $this->data['orderStatus'];
+        if (isset($this->data['OrderStatus'])) {
+            return $this->data['OrderStatus'];
         }
 
         return null;
     }
-
 
     /**
      * Get the action code description from the response.
      *
      * @return string|null
      */
-    public function getActionCodeDescription() : ?string
+    public function getActionCodeDescription(): ?string
     {
         if (isset($this->data['actionCodeDescription'])) {
             return $this->data['actionCodeDescription'];
@@ -91,11 +108,12 @@ class CommonResponse extends AbstractResponse
      *
      * @return string|null
      */
-    public function getBindingId() : ?string
+    public function getBindingId(): ?string
     {
-        if (isset($this->data['bindingInfo']['bindingId'])) {
-            return $this->data['bindingInfo']['bindingId'];
+        if (isset($this->data['BindingID'])) {
+            return $this->data['BindingID'];
         }
+
         return null;
     }
 
@@ -104,10 +122,10 @@ class CommonResponse extends AbstractResponse
      *
      * @return array
      */
-    public function getCardAuthInfo() : array
+    public function getCardAuthInfo(): array
     {
-        if (isset($this->data['cardAuthInfo'])) {
-            return $this->data['cardAuthInfo'];
+        if (isset($this->data['CardHolderID'])) {
+            return $this->data['CardHolderID'];
         }
 
         return [];
@@ -116,7 +134,7 @@ class CommonResponse extends AbstractResponse
     /**
      * @return string|null
      */
-    public function getRequestId() : ?string
+    public function getRequestId(): ?string
     {
         if (isset($this->headers['Request-Id'])) {
             return $this->headers['Request-Id'][0];

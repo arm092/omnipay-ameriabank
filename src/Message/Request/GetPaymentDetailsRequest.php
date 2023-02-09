@@ -6,7 +6,7 @@ namespace Omnipay\Ameria\Message\Request;
  * Class GetOrderStatusExtendedRequest
  * @package Omnipay\Arca\Message
  */
-class GetOrderStatusExtendedRequest extends AbstractRequest
+class GetPaymentDetailsRequest extends AbstractRequest
 {
     /**
      * Prepare data to send
@@ -20,7 +20,7 @@ class GetOrderStatusExtendedRequest extends AbstractRequest
 
         $data = parent::getData();
 
-        $data['orderId'] = $this->getTransactionId();
+        $data['PaymentID'] = $this->getTransactionId();
 
         if ($this->getLanguage()) {
             $data['language'] = $this->getLanguage();
@@ -34,6 +34,6 @@ class GetOrderStatusExtendedRequest extends AbstractRequest
      */
     public function getEndpoint() : string
     {
-        return $this->getUrl() . '/getOrderStatusExtended.do';
+        return $this->getUrl() . '/GetPaymentDetails';
     }
 }

@@ -37,21 +37,43 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
-        return 'Arca';
+        return 'Ameria';
     }
-
 
     /**
      * @return array
      */
-    public function getDefaultParameters() : array
+    public function getDefaultParameters(): array
     {
         return [
-            'username' => '',
-            'password' => '',
+            'client_id' => '',
+            'username'  => '',
+            'password'  => '',
         ];
+    }
+
+    /**
+     * Get account client_id.
+     *
+     * @return string
+     */
+    public function getClientId(): string
+    {
+        return $this->getParameter('client_id');
+    }
+
+    /**
+     * Set account client_id.
+     *
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setClientId($value): Gateway
+    {
+        return $this->setParameter('client_id', $value);
     }
 
     /**
@@ -59,7 +81,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getUsername() : string
+    public function getUsername(): string
     {
         return $this->getParameter('username');
     }
@@ -71,7 +93,7 @@ class Gateway extends AbstractGateway
      *
      * @return $this
      */
-    public function setUsername($value) : Gateway
+    public function setUsername($value): Gateway
     {
         return $this->setParameter('username', $value);
     }
@@ -81,7 +103,7 @@ class Gateway extends AbstractGateway
      *
      * @return string|null
      */
-    public function getBindingUsername() : ?string
+    public function getBindingUsername(): ?string
     {
         return $this->getParameter('bindingUsername');
     }
@@ -89,11 +111,11 @@ class Gateway extends AbstractGateway
     /**
      * Set account username for binding payments.
      *
-     * @param string|null $value
+     * @param  string|null  $value
      *
-     * @return \Omnipay\Arca\Gateway
+     * @return \Omnipay\Ameria\Gateway
      */
-    public function setBindingUsername(?string $value) : Gateway
+    public function setBindingUsername(?string $value): Gateway
     {
         return $this->setParameter('bindingUsername', $value);
     }
@@ -103,7 +125,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->getParameter('password');
     }
@@ -115,7 +137,7 @@ class Gateway extends AbstractGateway
      *
      * @return $this
      */
-    public function setPassword($value) : Gateway
+    public function setPassword($value): Gateway
     {
         return $this->setParameter('password', $value);
     }
@@ -123,11 +145,11 @@ class Gateway extends AbstractGateway
     /**
      * Create Purchase Request.
      *
-     * @param array $options
+     * @param  array  $options
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function purchase(array $options = []) : AbstractRequest
+    public function purchase(array $options = []): AbstractRequest
     {
         return $this->createRequest(RegisterRequest::class, $options);
     }
@@ -135,59 +157,47 @@ class Gateway extends AbstractGateway
     /**
      * Create Complete Purchase Request.
      *
-     * @param array $options
+     * @param  array  $options
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function completePurchase(array $options = []) : AbstractRequest
+    public function completePurchase(array $options = []): AbstractRequest
     {
-        return $this->getOrderStatusExtended($options);
+        return $this->getPaymentDetails($options);
     }
 
     /**
      * Create RegisterPreAuth Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function registerPreAuth(array $parameters = []) : AbstractRequest
+    public function registerPreAuth(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(RegisterPreAuthRequest::class, $parameters);
     }
 
     /**
-     * Create GetOrderStatus Request.
-     *
-     * @param array $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function getOrderStatus(array $parameters = []) : AbstractRequest
-    {
-        return $this->createRequest(GetOrderStatusRequest::class, $parameters);
-    }
-
-    /**
      * Create getOrderStatusExtended Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function getOrderStatusExtended(array $parameters = []) : AbstractRequest
+    public function getPaymentDetails(array $parameters = []): AbstractRequest
     {
-        return $this->createRequest(GetOrderStatusExtendedRequest::class, $parameters);
+        return $this->createRequest(GetPaymentDetailsRequest::class, $parameters);
     }
 
     /**
      * Create verifyEnrollment Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function verifyEnrollment(array $parameters = []) : AbstractRequest
+    public function verifyEnrollment(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(VerifyEnrollmentRequest::class, $parameters);
     }
@@ -195,11 +205,11 @@ class Gateway extends AbstractGateway
     /**
      * Create Deposit Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function deposit(array $parameters = []) : AbstractRequest
+    public function deposit(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(DepositRequest::class, $parameters);
     }
@@ -207,11 +217,11 @@ class Gateway extends AbstractGateway
     /**
      * Create Reverse Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function reverse(array $parameters = []) : AbstractRequest
+    public function reverse(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(ReverseRequest::class, $parameters);
     }
@@ -219,31 +229,31 @@ class Gateway extends AbstractGateway
     /**
      * Create Refund Request.
      *
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function refund(array $parameters = []) : AbstractRequest
+    public function refund(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(RefundRequest::class, $parameters);
     }
 
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
-     * @return \Omnipay\Arca\Message\Request\BindingPaymentRequest|AbstractRequest
+     * @return \Omnipay\Ameria\Message\Request\BindingPaymentRequest|AbstractRequest
      */
-    public function bindingPayment(array $parameters = []) : BindingPaymentRequest
+    public function bindingPayment(array $parameters = []): BindingPaymentRequest
     {
         return $this->createRequest(BindingPaymentRequest::class, $parameters);
     }
 
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function getBindings(array $parameters = []) : AbstractRequest
+    public function getBindings(array $parameters = []): AbstractRequest
     {
         return $this->createRequest(GetBindingsRequest::class, $parameters);
     }

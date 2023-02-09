@@ -25,7 +25,27 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @var string
      */
-    protected string $testEndpoint = 'https://ipaytest.arca.am:8445/payment/rest';
+    protected string $testEndpoint = 'https://servicestest.ameriabank.am/VPOS/api/VPOS';
+
+    /**
+     * @return mixed
+     */
+    public function getClientId()
+    {
+        return $this->getParameter('client_id');
+    }
+
+    /**
+     * Set merchant id
+     *
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setClientId($value): AbstractRequest
+    {
+        return $this->setParameter('client_id', $value);
+    }
 
     /**
      * @return mixed
@@ -42,7 +62,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @return $this
      */
-    public function setUsername($value) : AbstractRequest
+    public function setUsername($value): AbstractRequest
     {
         return $this->setParameter('username', $value);
     }
@@ -50,7 +70,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
     /**
      * @return string
      */
-    public function getBindingUsername() : ?string
+    public function getBindingUsername(): ?string
     {
         return $this->getParameter('bindingUsername');
     }
@@ -62,7 +82,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @return $this
      */
-    public function setBindingUsername($value) : AbstractRequest
+    public function setBindingUsername($value): AbstractRequest
     {
         return $this->setParameter('bindingUsername', $value);
     }
@@ -84,7 +104,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @return $this
      */
-    public function setPassword($value) : AbstractRequest
+    public function setPassword($value): AbstractRequest
     {
         return $this->setParameter('password', $value);
     }
@@ -96,7 +116,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->getTestMode() ? $this->testEndpoint : $this->endpoint;
     }
@@ -132,11 +152,11 @@ abstract class AbstractRequest extends CommonAbstractRequest
     /**
      * Set the request language.
      *
-     * @param string $value
+     * @param  string  $value
      *
      * @return $this
      */
-    public function setLanguage($value) : AbstractRequest
+    public function setLanguage($value): AbstractRequest
     {
         return $this->setParameter('language', $value);
     }
@@ -153,22 +173,44 @@ abstract class AbstractRequest extends CommonAbstractRequest
      * Set the request jsonParams.
      * Fields of additional information
      *
-     * @param string $value
+     * @param  string  $value
      *
      * @return $this
      */
-    public function setJsonParams(string $value) : AbstractRequest
+    public function setJsonParams(string $value): AbstractRequest
     {
         return $this->setParameter('jsonParams', $value);
     }
 
     /**
+     * Unique ID for binding transactions (is used when needs to do card binding, in other cases it is not required)
+     *
+     * @return string
+     */
+    public function getCardHolderId()
+    {
+        return $this->getParameter('card_holder_id');
+    }
+
+    /**
+     * Set the unique id for card holder
+     *
+     * @param  string  $value
+     *
+     * @return $this
+     */
+    public function setCardHolderId(string $value): AbstractRequest
+    {
+        return $this->setParameter('card_holder_id', $value);
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function sendData($data) : ResponseInterface
+    public function sendData($data): ResponseInterface
     {
         $headers = [
-            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Content-Type' => 'application/json',
         ];
 
         $body = $data ? http_build_query($data, '', '&') : null;
@@ -179,12 +221,12 @@ abstract class AbstractRequest extends CommonAbstractRequest
     }
 
     /**
-     * @param string $data
-     * @param array  $headers
+     * @param  string  $data
+     * @param  array  $headers
      *
      * @return CommonResponse
      */
-    protected function createResponse(string $data, array $headers = []) : ResponseInterface
+    protected function createResponse(string $data, array $headers = []): ResponseInterface
     {
         return $this->response = new CommonResponse($this, $data, $headers);
     }
@@ -193,13 +235,14 @@ abstract class AbstractRequest extends CommonAbstractRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData() : array
+    public function getData(): array
     {
-        $this->validate('username', 'password');
+        $this->validate('client_id', 'username', 'password');
 
         return [
-            'userName' => $this->getUsername(),
-            'password' => $this->getPassword(),
+            'ClientID' => $this->getClientId(),
+            'Username' => $this->getUsername(),
+            'Password' => $this->getPassword(),
         ];
     }
 }

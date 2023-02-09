@@ -28,7 +28,7 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
     /**
      * @param string $value
      *
-     * @return \Omnipay\Arca\Message\Request\AbstractBindingAwareRequest
+     * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
      */
     public function setBindingId(string $value) : AbstractBindingAwareRequest
     {
@@ -52,7 +52,7 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
      *
      * @param string|int $value
      *
-     * @return \Omnipay\Arca\Message\Request\AbstractBindingAwareRequest
+     * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
      */
     public function setClientId(string|int $value) : AbstractBindingAwareRequest
     {

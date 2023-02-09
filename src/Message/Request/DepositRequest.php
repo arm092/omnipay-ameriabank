@@ -32,6 +32,6 @@ class DepositRequest extends AbstractRequest
      */
     public function getEndpoint(): string
     {
-        return $this->getUrl() . '/deposit.do';
+        return $this->getUrl() . '/InitPayment';
     }
 }

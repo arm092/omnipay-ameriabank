@@ -40,7 +40,7 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
     /**
      * @param string $value
      *
-     * @return \Omnipay\Arca\Message\BindingPaymentRequest
+     * @return \Omnipay\Ameria\Message\BindingPaymentRequest
      */
     public function setBindingId(string $value) : BindingPaymentRequest
     {
