@@ -8,24 +8,11 @@ use Omnipay\Common\Message\RequestInterface;
 
 abstract class AbstractResponse extends OmnipayAbstractResponse implements RedirectResponseInterface
 {
-    public const NO_ERROR  = 1;
+    public const NO_ERROR  = '00';
     public const DEPOSITED = 2;
-
-    /**
-     * @var string|null
-     */
     protected ?string $requestId = null;
-
-    /**
-     * @var array
-     */
     protected array $headers = [];
 
-    /**
-     * @param \Omnipay\Common\Message\RequestInterface $request
-     * @param string                                   $data
-     * @param array                                    $headers
-     */
     public function __construct(RequestInterface $request, string $data, array $headers = [])
     {
         parent::__construct($request, $data);
@@ -44,39 +31,18 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
      */
     public function getMessage() : ?string
     {
-        if (isset($this->data['ResponseMessage'])) {
-            return $this->data['ResponseMessage'];
-        }
-
-        if (isset($this->data['Description'])) {
-            return $this->data['Description'];
-        }
-
-        if (isset($this->data['TrxnDescription'])) {
-            return $this->data['TrxnDescription'];
-        }
-
-        return null;
+        return $this->data['ResponseMessage']
+            ?? $this->data['Description']
+            ?? $this->data['TrxnDescription']
+            ?? null;
     }
 
     /**
      * Get the error code from the response.
-     *
-     * Returns null if the request was successful.
-     *
-     * @return string|null
      */
     public function getCode() : ?string
     {
-        if (isset($this->data['ResponseCode'])) {
-            return $this->data['ResponseCode'];
-        }
-
-//        if (isset($this->data['ErrorCode'])) {
-//            return $this->data['ErrorCode'];
-//        }
-
-        return null;
+        return $this->data['ResponseCode'] ?? null;
     }
 
     /**
@@ -86,21 +52,19 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
      */
     public function isSuccessful() : bool
     {
-        if ($this->getOrderStatus()) {
-            return $this->isCompleted();
+        if (method_exists(static::class, 'getOrderStatus')) {
+            return $this->isCompleted() && $this->isNotError();
         }
 
         return $this->isNotError();
     }
 
     /**
-     * Is the response no error
-     *
-     * @return bool
+     * Is the response has no error
      */
     public function isNotError() : bool
     {
-        return $this->getCode() == self::NO_ERROR;
+        return $this->getCode() === static::NO_ERROR;
     }
 
     /**
@@ -114,11 +78,4 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
         return $this->getOrderStatus() == self::DEPOSITED;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRedirect() : bool
-    {
-        return isset($this->data['PaymentID']);
-    }
 }

@@ -9,7 +9,7 @@ use Omnipay\Ameria\Message\Request\GetPaymentDetailsRequest;
 use Omnipay\Ameria\Message\Request\GetOrderStatusRequest;
 use Omnipay\Ameria\Message\Request\RefundRequest;
 use Omnipay\Ameria\Message\Request\RegisterPreAuthRequest;
-use Omnipay\Ameria\Message\Request\RegisterRequest;
+use Omnipay\Ameria\Message\Request\InitPaymentRequest;
 use Omnipay\Ameria\Message\Request\ReverseRequest;
 use Omnipay\Ameria\Message\Request\VerifyEnrollmentRequest;
 use Omnipay\Common\AbstractGateway;
@@ -151,7 +151,7 @@ class Gateway extends AbstractGateway
      */
     public function purchase(array $options = []): AbstractRequest
     {
-        return $this->createRequest(RegisterRequest::class, $options);
+        return $this->createRequest(InitPaymentRequest::class, $options);
     }
 
     /**

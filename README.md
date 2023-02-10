@@ -48,6 +48,7 @@ Or you can simply run
     $gateway->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
     $gateway->setAmount(10); // Amount to charge
     $gateway->setTransactionId(XXXX); // Transaction ID from your system
+    $gateway->setTestMode(true); // For enabling test mode
 
 ```
 
@@ -56,12 +57,15 @@ Or you can simply run
 ```php
 
     $purchase = $gateway->purchase()->send();
-    $purchase->setLanguage(\App::getLocale()); // Interface language
-    $purchase->redirect();
+    if ($purchase->isSuccessfull()) {
+        $purchase->setLanguage(\App::getLocale()); // Interface language ('am', 'ru', 'en')
+        $purchase->setTestMode(true); // For enabling test mode
+        $purchase->redirect();
+    }
 
 ```
 
-4. Create a webhook controller to handle the callback request at your `AMERIA_RETURN_URL` and catch the webhook as follows
+4. Create a webhook controller to handle the back URL request at your `AMERIA_RETURN_URL` and catch the webhook as follows
 
 ```php
 

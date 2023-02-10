@@ -9,7 +9,7 @@ use Omnipay\Common\Message\ResponseInterface;
 /**
  * Class AbstractRequest
  *
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 abstract class AbstractRequest extends CommonAbstractRequest
 {
@@ -18,7 +18,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @var string URL
      */
-    protected string $endpoint = 'https://ipay.arca.am/payment/rest';
+    protected string $endpoint = 'https://services.ameriabank.am/VPOS/api/VPOS';
 
     /**
      * Test Endpoint URL.
