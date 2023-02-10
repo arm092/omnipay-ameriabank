@@ -11,36 +11,6 @@ namespace Omnipay\Ameria\Message\Response;
  */
 class CommonResponse extends AbstractResponse
 {
-    protected string $endpoint = 'https://services.ameriabank.am/VPOS';
-    protected string $testEndpoint = 'https://servicestest.ameriabank.am/VPOS';
-
-    /**
-     * Get response redirect url
-     *
-     * @return string
-     */
-    public function getRedirectUrl(): string
-    {
-        return $this->endpoint.'/Pay?'.http_build_query([
-                'id'   => $this->data['PaymentId'],
-                'lang' => $this->data['Language'] ?? 'en',
-            ]);
-    }
-
-    /**
-     * Set interface language
-     *
-     * @param  string  $value
-     *
-     * @return AbstractResponse
-     */
-    public function setLanguage(string $value): AbstractResponse
-    {
-        $this->data['Language'] = $value;
-
-        return $this;
-    }
-
     /**
      * Get the transaction reference.
      *

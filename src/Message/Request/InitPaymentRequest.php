@@ -6,7 +6,7 @@ use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Ameria\Message\Response\InitPaymentResponse;
 
 /**
- * Class RegisterRequest
+ * Class InitPaymentRequest
  *
  * @package Omnipay\Ameria\Message
  */
