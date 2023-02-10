@@ -28,7 +28,7 @@ class InitPaymentResponse extends AbstractResponse
 
     public function getEndpoint(): string
     {
-        return ($this->getTestMode() ? $this->testEndpoint : $this->endpoint) . '/Pay';
+        return ($this->getTestMode() ? $this->testEndpoint : $this->endpoint).'/Pay';
     }
 
     /**
@@ -79,7 +79,7 @@ class InitPaymentResponse extends AbstractResponse
     /**
      * Is the response has no error
      */
-    public function isNotError() : bool
+    public function isNotError(): bool
     {
         return isset($this->data['PaymentID']) && $this->getCode() == static::NO_ERROR;
     }

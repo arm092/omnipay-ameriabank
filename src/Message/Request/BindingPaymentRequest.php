@@ -17,14 +17,14 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
      *
      * @return array
      */
-    public function getData() : array
+    public function getData(): array
     {
         $data = parent::getData();
 
-        $data['mdOrder'] = $this->getTransactionReference();
+        $data['mdOrder']   = $this->getTransactionReference();
         $data['bindingId'] = $this->getBindingId();
-        $data['language'] = $this->getLanguage();
-        $data['cvc'] = 615;
+        $data['language']  = $this->getLanguage();
+        $data['cvc']       = 615;
 
         return $data;
     }
@@ -32,17 +32,17 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
     /**
      * @return string
      */
-    public function getBindingId() : string
+    public function getBindingId(): string
     {
         return $this->getParameter('bindingId');
     }
 
     /**
-     * @param string $value
+     * @param  string  $value
      *
      * @return \Omnipay\Ameria\Message\BindingPaymentRequest
      */
-    public function setBindingId(string $value) : BindingPaymentRequest
+    public function setBindingId(string $value): BindingPaymentRequest
     {
         return $this->setParameter('bindingId', $value);
     }
@@ -50,12 +50,12 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
     /**
      * @return string
      */
-    public function getEndpoint() : string
+    public function getEndpoint(): string
     {
         return $this->getUrl().'/paymentOrderBinding.do';
     }
 
-    protected function createResponse(string $data, array $headers = []) : BindingPaymentResponse
+    protected function createResponse(string $data, array $headers = []): BindingPaymentResponse
     {
         return $this->response = new BindingPaymentResponse($this, $data, $headers);
     }

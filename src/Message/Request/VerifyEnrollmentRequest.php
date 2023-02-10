@@ -4,6 +4,7 @@ namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class VerifyEnrollmentRequest
+ *
  * @package Omnipay\Ameria\Message
  */
 class VerifyEnrollmentRequest extends AbstractRequest
@@ -20,9 +21,10 @@ class VerifyEnrollmentRequest extends AbstractRequest
      * Set the request pan.
      *
      * @param $value
+     *
      * @return $this
      */
-    public function setPan($value) : VerifyEnrollmentRequest
+    public function setPan($value): VerifyEnrollmentRequest
     {
         return $this->setParameter('pan', $value);
     }
@@ -33,7 +35,7 @@ class VerifyEnrollmentRequest extends AbstractRequest
      * @return array|mixed
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData() : array
+    public function getData(): array
     {
         $this->validate('pan');
 
@@ -47,8 +49,8 @@ class VerifyEnrollmentRequest extends AbstractRequest
     /**
      * @return string
      */
-    public function getEndpoint() : string
+    public function getEndpoint(): string
     {
-        return $this->getUrl() . '/verifyEnrollment.do';
+        return $this->getUrl().'/verifyEnrollment.do';
     }
 }

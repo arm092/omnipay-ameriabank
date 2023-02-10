@@ -10,32 +10,31 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
      *
      * @return array
      */
-    public function getData() : array
+    public function getData(): array
     {
         $this->validate('bindingUsername', 'password');
 
         $data = parent::getData();
+
 //        $data['userName'] = $this->getBindingUsername();
 
         return $data;
     }
 
-    public function getBindingId() : string
+    public function getBindingId(): string
     {
         return $this->getParameter('bindingId');
     }
 
     /**
-     * @param string $value
+     * @param  string  $value
      *
      * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
      */
-    public function setBindingId(string $value) : AbstractBindingAwareRequest
+    public function setBindingId(string $value): AbstractBindingAwareRequest
     {
         return $this->setParameter('bindingId', $value);
     }
-
-
 
     /**
      * Get the request clientId.
@@ -50,11 +49,11 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
     /**
      * Set the request clientId.
      *
-     * @param string|int $value
+     * @param  string|int  $value
      *
      * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
      */
-    public function setClientId(string|int $value) : AbstractBindingAwareRequest
+    public function setClientId(string | int $value): AbstractBindingAwareRequest
     {
         return $this->setParameter('clientId', $value);
     }

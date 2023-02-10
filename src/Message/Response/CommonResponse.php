@@ -11,7 +11,7 @@ namespace Omnipay\Ameria\Message\Response;
  */
 class CommonResponse extends AbstractResponse
 {
-    public const NO_ERROR   = '00';
+    public const NO_ERROR = '00';
 
     public function getRequestId(): ?string
     {

@@ -10,9 +10,9 @@ class GetBindingsRequest extends AbstractBindingAwareRequest
      *
      * @return array
      */
-    public function getData() : array
+    public function getData(): array
     {
-        $data = parent::getData();
+        $data             = parent::getData();
         $data['userName'] = $this->getUsername();
         $data['clientId'] = $this->getClientId();
 
@@ -22,7 +22,7 @@ class GetBindingsRequest extends AbstractBindingAwareRequest
     /**
      * @return string
      */
-    public function getEndpoint() : string
+    public function getEndpoint(): string
     {
         return $this->getUrl().'/getBindings.do';
     }
