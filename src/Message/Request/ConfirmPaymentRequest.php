@@ -3,10 +3,11 @@
 namespace Omnipay\Ameria\Message\Request;
 
 /**
- * Class DepositRequest
+ * Class ConfirmPaymentRequest
+ *
  * @package Omnipay\Ameria\Message
  */
-class DepositRequest extends AbstractRequest
+class ConfirmPaymentRequest extends AbstractRequest
 {
     /**
      * @return array
@@ -18,10 +19,10 @@ class DepositRequest extends AbstractRequest
 
         $data = [];
 
-        $data['orderId'] = $this->getTransactionId();
+        $data['PaymentID'] = $this->getTransactionId();
 
         if ($this->getAmount()) {
-            $data['amount'] = $this->getAmount();
+            $data['Amount'] = $this->getAmount();
         }
 
         return $data;
@@ -32,6 +33,6 @@ class DepositRequest extends AbstractRequest
      */
     public function getEndpoint(): string
     {
-        return $this->getUrl() . '/InitPayment';
+        return $this->getUrl().'/ConfirmPayment';
     }
 }

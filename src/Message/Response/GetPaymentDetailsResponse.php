@@ -11,6 +11,8 @@ namespace Omnipay\Ameria\Message\Response;
  */
 class GetPaymentDetailsResponse extends AbstractResponse
 {
+    public const NO_ERROR   = '00';
+
     /**
      * Get the Unique ID|code of the transaction
      *
@@ -73,6 +75,16 @@ class GetPaymentDetailsResponse extends AbstractResponse
             'ClientName' => $this->data['ClientName'] ?? null,
             'ExpDate'    => $this->data['ExpDate'] ?? null,
         ];
+    }
+
+    /**
+     * Is the orderStatus authorized
+     *
+     * @return bool
+     */
+    public function isAuthorized(): bool
+    {
+        return $this->getOrderStatus() == self::AUTHORIZED;
     }
 
     public function getRequestId(): ?string

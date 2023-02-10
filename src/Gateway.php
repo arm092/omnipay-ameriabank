@@ -3,7 +3,7 @@
 namespace Omnipay\Ameria;
 
 use Omnipay\Ameria\Message\Request\BindingPaymentRequest;
-use Omnipay\Ameria\Message\Request\DepositRequest;
+use Omnipay\Ameria\Message\Request\ConfirmPaymentRequest;
 use Omnipay\Ameria\Message\Request\GetBindingsRequest;
 use Omnipay\Ameria\Message\Request\GetPaymentDetailsRequest;
 use Omnipay\Ameria\Message\Request\GetOrderStatusRequest;
@@ -211,7 +211,7 @@ class Gateway extends AbstractGateway
      */
     public function deposit(array $parameters = []): AbstractRequest
     {
-        return $this->createRequest(DepositRequest::class, $parameters);
+        return $this->createRequest(ConfirmPaymentRequest::class, $parameters);
     }
 
     /**
