@@ -10,7 +10,7 @@ use Omnipay\Ameria\Message\Request\GetOrderStatusRequest;
 use Omnipay\Ameria\Message\Request\RefundRequest;
 use Omnipay\Ameria\Message\Request\RegisterPreAuthRequest;
 use Omnipay\Ameria\Message\Request\InitPaymentRequest;
-use Omnipay\Ameria\Message\Request\ReverseRequest;
+use Omnipay\Ameria\Message\Request\CancelPaymentRequest;
 use Omnipay\Ameria\Message\Request\VerifyEnrollmentRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
@@ -223,7 +223,7 @@ class Gateway extends AbstractGateway
      */
     public function reverse(array $parameters = []): AbstractRequest
     {
-        return $this->createRequest(ReverseRequest::class, $parameters);
+        return $this->createRequest(CancelPaymentRequest::class, $parameters);
     }
 
     /**

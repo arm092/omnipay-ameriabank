@@ -3,26 +3,23 @@
 namespace Omnipay\Ameria\Message\Request;
 
 /**
- * Class ReverseRequest
+ * Class CancelPaymentRequest
  *
  * @package Omnipay\Ameria\Message
  */
-class ReverseRequest extends AbstractRequest
+class CancelPaymentRequest extends AbstractRequest
 {
-
     /**
      * Prepare data to send
      *
-     * @return array|mixed
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
     public function getData(): array
     {
         $this->validate('transactionId');
 
-        $data = parent::getData();
-
-        $data['orderId'] = $this->getTransactionId();
+        $data              = parent::getData();
+        $data['PaymentID'] = $this->getTransactionId();
 
         return $data;
     }
@@ -32,6 +29,6 @@ class ReverseRequest extends AbstractRequest
      */
     public function getEndpoint(): string
     {
-        return $this->getUrl().'/reverse.do';
+        return $this->getUrl().'/CancelPayment';
     }
 }
