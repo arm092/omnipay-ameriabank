@@ -4,7 +4,7 @@ namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class RegisterPreAuthRequest
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 class RegisterPreAuthRequest extends AbstractRequest
 {

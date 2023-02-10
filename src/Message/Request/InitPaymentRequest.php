@@ -8,7 +8,7 @@ use Omnipay\Ameria\Message\Response\InitPaymentResponse;
 /**
  * Class RegisterRequest
  *
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 class InitPaymentRequest extends AbstractRequest
 {

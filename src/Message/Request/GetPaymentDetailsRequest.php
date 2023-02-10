@@ -4,7 +4,7 @@ namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class GetOrderStatusExtendedRequest
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 class GetPaymentDetailsRequest extends AbstractRequest
 {

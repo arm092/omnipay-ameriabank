@@ -5,7 +5,7 @@ namespace Omnipay\Ameria\Message\Request;
 use Omnipay\Ameria\Message\Response\BindingPaymentResponse;
 
 /**
- * @package Omnipay\Arca\Message\Request
+ * @package Omnipay\Ameria\Message\Request
  *
  * @method BindingPaymentResponse send
  */

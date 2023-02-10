@@ -4,7 +4,7 @@ namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class ReverseRequest
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 class ReverseRequest extends AbstractRequest
 {

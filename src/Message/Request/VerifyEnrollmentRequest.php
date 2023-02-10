@@ -4,7 +4,7 @@ namespace Omnipay\Ameria\Message\Request;
 
 /**
  * Class VerifyEnrollmentRequest
- * @package Omnipay\Arca\Message
+ * @package Omnipay\Ameria\Message
  */
 class VerifyEnrollmentRequest extends AbstractRequest
 {
