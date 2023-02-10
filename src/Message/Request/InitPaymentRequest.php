@@ -49,7 +49,9 @@ class InitPaymentRequest extends AbstractRequest
         $data['Description'] = $this->getDescription();
         $data['OrderId']     = $this->getTransactionId();
         $data['Amount']      = $this->getAmountInteger();
-        $data['BackURL']     = $this->getReturnUrl();
+        if ($this->getReturnUrl()) {
+            $data['BackURL'] = $this->getReturnUrl();
+        }
         if ($this->getJsonParams()) {
             $data['Opaque'] = $this->getJsonParams();
 //        $data['Opaque'] = json_encode(["FORCE_3DS2" => true]);
