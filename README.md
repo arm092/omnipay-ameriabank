@@ -42,12 +42,12 @@ Or you can simply run
 ```php
 
     $gateway = Omnipay::create('Ameria');
-    $gateway->setClientId(env('AMERIA_CLIENT_ID'));
-    $gateway->setUsername(env('AMERIA_USERNAME'));
-    $gateway->setPassword(env('AMERIA_PASSWORD'));
-    $purchase = $gateway->purchase();
+    $gateway->setClientId(env('AMERIA_CLIENT_ID')); // Merchant ID - Provided by bank
+    $gateway->setUsername(env('AMERIA_USERNAME')); // Username - Provided by bank
+    $gateway->setPassword(env('AMERIA_PASSWORD')); // Password - Provided by bank
+    $purchase = $gateway->purchase(); // Creating purchase request
     $purchase->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
-    $purchase->setAmount(10); // Amount to charge should be decimal
+    $purchase->setAmount(10); // Amount to charge - should be decimal
     $purchase->setTransactionId(XXXX); // Transaction ID from your system
     $purchase->setTestMode(true); // For enabling test mode
     $purchase->setOpaque(json_encode(['email' => 'user@example.com'])); // Is not mandatory field and used as additional information during information exchange 
@@ -76,10 +76,12 @@ Or you can simply run
     $gateway->setUsername(env('AMERIA_USERNAME'));
     $gateway->setPassword(env('AMERIA_PASSWORD'));
     
-    $purchase = $gateway->completePurchase()->send();
+    $purchaseCompleteRequest = $gateway->completePurchase();
+    $purchaseCompleteRequest->setTransactionId(request()->get('paymentID'));
+    $purchaseCompleteResponse = $purchaseCompleteRequest->send();
     
     // Do the rest with $purchase and response with 'OK'
-    if ($purchase->isSuccessful()) {
+    if ($purchaseCompleteResponse->isSuccessful()) {
         
         // Your logic
         
