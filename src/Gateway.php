@@ -5,28 +5,21 @@ namespace Omnipay\Ameria;
 use Omnipay\Ameria\Message\Request\BindingPaymentRequest;
 use Omnipay\Ameria\Message\Request\ConfirmPaymentRequest;
 use Omnipay\Ameria\Message\Request\GetBindingsRequest;
+use Omnipay\Ameria\Message\Request\ActivateBindingRequest;
 use Omnipay\Ameria\Message\Request\GetPaymentDetailsRequest;
-use Omnipay\Ameria\Message\Request\GetOrderStatusRequest;
 use Omnipay\Ameria\Message\Request\RefundRequest;
-use Omnipay\Ameria\Message\Request\RegisterPreAuthRequest;
 use Omnipay\Ameria\Message\Request\InitPaymentRequest;
 use Omnipay\Ameria\Message\Request\CancelPaymentRequest;
-use Omnipay\Ameria\Message\Request\VerifyEnrollmentRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Common\Message\NotificationInterface;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Ameria\Message\Request\DeactivateBindingRequest;
 
 /**
- * Arca Gateway
+ * Ameria Gateway
  *
- * @method RequestInterface authorize(array $options = [])
- * @method RequestInterface completeAuthorize(array $options = [])
- * @method RequestInterface capture(array $options = [])
- * @method RequestInterface void(array $options = [])
- * @method RequestInterface createCard(array $options = [])
  * @method RequestInterface updateCard(array $options = [])
- * @method RequestInterface deleteCard(array $options = [])
  * @method NotificationInterface acceptNotification(array $options = [])
  * @method RequestInterface fetchTransaction(array $options = [])
  */
@@ -144,10 +137,6 @@ class Gateway extends AbstractGateway
 
     /**
      * Create Purchase Request.
-     *
-     * @param  array  $options
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function purchase(array $options = []): AbstractRequest
     {
@@ -156,10 +145,6 @@ class Gateway extends AbstractGateway
 
     /**
      * Create Complete Purchase Request.
-     *
-     * @param  array  $options
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function completePurchase(array $options = []): AbstractRequest
     {
@@ -168,99 +153,61 @@ class Gateway extends AbstractGateway
 
     /**
      * Create RegisterPreAuth Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function registerPreAuth(array $parameters = []): AbstractRequest
+    public function authorize(array $options = []): AbstractRequest
     {
-        return $this->createRequest(RegisterPreAuthRequest::class, $parameters);
+        return $this->createRequest(InitPaymentRequest::class, $options);
     }
 
     /**
      * Create getOrderStatusExtended Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function getPaymentDetails(array $parameters = []): AbstractRequest
+    public function getPaymentDetails(array $options = []): AbstractRequest
     {
-        return $this->createRequest(GetPaymentDetailsRequest::class, $parameters);
-    }
-
-    /**
-     * Create verifyEnrollment Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function verifyEnrollment(array $parameters = []): AbstractRequest
-    {
-        return $this->createRequest(VerifyEnrollmentRequest::class, $parameters);
+        return $this->createRequest(GetPaymentDetailsRequest::class, $options);
     }
 
     /**
      * Create Deposit Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function deposit(array $parameters = []): AbstractRequest
+    public function capture(array $options = []): AbstractRequest
     {
-        return $this->createRequest(ConfirmPaymentRequest::class, $parameters);
+        return $this->createRequest(ConfirmPaymentRequest::class, $options);
     }
 
     /**
      * Create Reverse Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function reverse(array $parameters = []): AbstractRequest
+    public function void(array $options = []): AbstractRequest
     {
-        return $this->createRequest(CancelPaymentRequest::class, $parameters);
+        return $this->createRequest(CancelPaymentRequest::class, $options);
     }
 
     /**
      * Create Refund Request.
-     *
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function refund(array $parameters = []): AbstractRequest
+    public function refund(array $options = []): AbstractRequest
     {
-        return $this->createRequest(RefundRequest::class, $parameters);
+        return $this->createRequest(RefundRequest::class, $options);
     }
 
-    /**
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Ameria\Message\Request\BindingPaymentRequest|AbstractRequest
-     */
-    public function bindingPayment(array $parameters = []): BindingPaymentRequest
+    public function createCard(array $options = []): AbstractRequest
     {
-        return $this->createRequest(BindingPaymentRequest::class, $parameters);
+        return $this->createRequest(BindingPaymentRequest::class, $options);
     }
 
-    /**
-     * @param  array  $parameters
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function getBindings(array $parameters = []): AbstractRequest
+    public function getBindings(array $options = []): AbstractRequest
     {
-        return $this->createRequest(GetBindingsRequest::class, $parameters);
+        return $this->createRequest(GetBindingsRequest::class, $options);
     }
 
-    public function __call($name, $arguments)
+    public function enableCard(array $options = []): AbstractRequest
     {
-        // TODO: Implement @method \Omnipay\Common\Message\NotificationInterface acceptNotification(array $options = [])
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface fetchTransaction(array $options = [])
+        return $this->createRequest(ActivateBindingRequest::class, $options);
+    }
+
+    public function disableCard(array $options = []): AbstractRequest
+    {
+        return $this->createRequest(DeactivateBindingRequest::class, $options);
     }
 }
