@@ -52,8 +52,8 @@ class InitPaymentRequest extends AbstractRequest
         if ($this->getReturnUrl()) {
             $data['BackURL'] = $this->getReturnUrl();
         }
-        if ($this->getJsonParams()) {
-            $data['Opaque'] = $this->getJsonParams();
+        if ($this->getOpaque()) {
+            $data['Opaque'] = $this->getOpaque();
         }
         if ($this->getTimeout()) {
             $data['Timeout'] = $this->getTimeout();

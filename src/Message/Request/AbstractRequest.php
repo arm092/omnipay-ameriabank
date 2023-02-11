@@ -144,9 +144,9 @@ abstract class AbstractRequest extends CommonAbstractRequest
     /**
      * @return mixed
      */
-    public function getJsonParams()
+    public function getOpaque()
     {
-        return $this->getParameter('jsonParams');
+        return $this->getParameter('opaque');
     }
 
     /**
@@ -157,9 +157,9 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @return $this
      */
-    public function setJsonParams(string $value): AbstractRequest
+    public function setOpaque(string $value): AbstractRequest
     {
-        return $this->setParameter('jsonParams', $value);
+        return $this->setParameter('opaque', $value);
     }
 
     /**

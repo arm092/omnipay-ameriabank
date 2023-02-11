@@ -30,8 +30,8 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
         $data['OrderId']     = $this->getTransactionId();
         $data['Amount']      = $this->getAmountInteger();
         $data['BackURL']     = $this->getReturnUrl();
-        if ($this->getJsonParams()) {
-            $data['Opaque'] = $this->getJsonParams();
+        if ($this->getOpaque()) {
+            $data['Opaque'] = $this->getOpaque();
         }
 
         return $data;
