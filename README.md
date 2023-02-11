@@ -16,7 +16,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "arm092/omnipay-ameriabank": "1.0.0"
+        "arm092/omnipay-ameriabank": "~1.0"
     }
 }
 ```
