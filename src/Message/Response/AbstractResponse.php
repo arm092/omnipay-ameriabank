@@ -46,7 +46,7 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
         return $this->data['ResponseCode'] ?? null;
     }
 
-    public function getAdditionalData(): ?string
+    public function getOpaque(): ?string
     {
         return $this->data['Opaque'] ?? null;
     }
