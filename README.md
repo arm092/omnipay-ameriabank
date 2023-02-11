@@ -45,10 +45,12 @@ Or you can simply run
     $gateway->setClientId(env('AMERIA_CLIENT_ID'));
     $gateway->setUsername(env('AMERIA_USERNAME'));
     $gateway->setPassword(env('AMERIA_PASSWORD'));
-    $gateway->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
-    $gateway->setAmount(10); // Amount to charge
-    $gateway->setTransactionId(XXXX); // Transaction ID from your system
-    $gateway->setTestMode(true); // For enabling test mode
+    $purchase = $gateway->purchase();
+    $purchase->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
+    $purchase->setAmount(10); // Amount to charge should be decimal
+    $purchase->setTransactionId(XXXX); // Transaction ID from your system
+    $purchase->setTestMode(true); // For enabling test mode
+    $purchase->setOpaque(json_encode(['email' => 'user@example.com'])); // Is not mandatory field and used as additional information during information exchange 
 
 ```
 
@@ -56,11 +58,11 @@ Or you can simply run
 
 ```php
 
-    $purchase = $gateway->purchase()->send();
-    if ($purchase->isSuccessfull()) {
-        $purchase->setLanguage(\App::getLocale()); // Interface language ('am', 'ru', 'en')
-        $purchase->setTestMode(true); // For enabling test mode
-        $purchase->redirect();
+    $purchaseResponse = $purchase->send();
+    if ($purchaseResponse->isSuccessfull()) {
+        $purchaseResponse->setLanguage(\App::getLocale()); // Interface language ('am', 'ru', 'en')
+        $purchaseResponse->setTestMode(true); // For enabling test mode
+        $purchaseResponse->redirect();
     }
 
 ```
@@ -70,9 +72,9 @@ Or you can simply run
 ```php
 
     $gateway = Omnipay::create('Ameria');
+    $gateway->setClientId(env('AMERIA_CLIENT_ID'));
     $gateway->setUsername(env('AMERIA_USERNAME'));
     $gateway->setPassword(env('AMERIA_PASSWORD'));
-    $gateway->setClientId(env('AMERIA_CLIENT_ID'));
     
     $purchase = $gateway->completePurchase()->send();
     
