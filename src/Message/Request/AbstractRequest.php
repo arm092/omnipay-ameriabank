@@ -144,26 +144,6 @@ abstract class AbstractRequest extends CommonAbstractRequest
     /**
      * @return mixed
      */
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-
-    /**
-     * Set the request language.
-     *
-     * @param  string  $value
-     *
-     * @return $this
-     */
-    public function setLanguage($value): AbstractRequest
-    {
-        return $this->setParameter('language', $value);
-    }
-
-    /**
-     * @return mixed
-     */
     public function getJsonParams()
     {
         return $this->getParameter('jsonParams');
@@ -180,28 +160,6 @@ abstract class AbstractRequest extends CommonAbstractRequest
     public function setJsonParams(string $value): AbstractRequest
     {
         return $this->setParameter('jsonParams', $value);
-    }
-
-    /**
-     * Unique ID for binding transactions (is used when needs to do card binding, in other cases it is not required)
-     *
-     * @return string
-     */
-    public function getCardHolderId()
-    {
-        return $this->getParameter('card_holder_id');
-    }
-
-    /**
-     * Set the unique id for card holder
-     *
-     * @param  string  $value
-     *
-     * @return $this
-     */
-    public function setCardHolderId(string $value): AbstractRequest
-    {
-        return $this->setParameter('card_holder_id', $value);
     }
 
     /**

@@ -12,49 +12,34 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
      */
     public function getData(): array
     {
-        $this->validate('bindingUsername', 'password');
-
-        $data = parent::getData();
-
-//        $data['userName'] = $this->getBindingUsername();
+        $data                = parent::getData();
+        if ($this->getBindingUsername()) {
+            $data['Username'] = $this->getBindingUsername();
+        }
+        $data['PaymentType'] = 6; //Binding
 
         return $data;
     }
 
-    public function getBindingId(): string
+    /**
+     * Unique ID for binding transactions (is used when needs to do card binding, in other cases it is not required)
+     *
+     * @return string
+     */
+    public function getCardHolderId(): string
     {
-        return $this->getParameter('bindingId');
+        return $this->getParameter('card_holder_id');
     }
 
     /**
+     * Set the unique id for card holder
+     *
      * @param  string  $value
      *
-     * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
+     * @return $this
      */
-    public function setBindingId(string $value): AbstractBindingAwareRequest
+    public function setCardHolderId(string $value): AbstractRequest
     {
-        return $this->setParameter('bindingId', $value);
-    }
-
-    /**
-     * Get the request clientId.
-     *
-     * @return string|int
-     */
-    public function getClientId(): string
-    {
-        return $this->getParameter('clientId');
-    }
-
-    /**
-     * Set the request clientId.
-     *
-     * @param  string|int  $value
-     *
-     * @return \Omnipay\Ameria\Message\Request\AbstractBindingAwareRequest
-     */
-    public function setClientId(string | int $value): AbstractBindingAwareRequest
-    {
-        return $this->setParameter('clientId', $value);
+        return $this->setParameter('card_holder_id', $value);
     }
 }

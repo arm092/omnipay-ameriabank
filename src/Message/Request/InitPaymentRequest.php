@@ -54,16 +54,9 @@ class InitPaymentRequest extends AbstractRequest
         }
         if ($this->getJsonParams()) {
             $data['Opaque'] = $this->getJsonParams();
-//        $data['Opaque'] = json_encode(["FORCE_3DS2" => true]);
-        }
-        if ($this->getCardHolderId()) {
-            $data['CardHolderID'] = $this->getCardHolderId();
         }
         if ($this->getTimeout()) {
             $data['Timeout'] = $this->getTimeout();
-        }
-        if ($this->getLanguage()) {
-            $data['language'] = $this->getLanguage();
         }
 
         return $data;

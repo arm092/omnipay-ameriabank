@@ -2,7 +2,8 @@
 
 namespace Omnipay\Ameria\Message\Request;
 
-use Omnipay\Ameria\Message\Response\BindingPaymentResponse;
+use Omnipay\Ameria\Message\Response\AbstractResponse;
+use Omnipay\Ameria\Message\Response\GetPaymentDetailsResponse;
 
 /**
  * @package Omnipay\Ameria\Message\Request
@@ -21,10 +22,17 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
     {
         $data = parent::getData();
 
-        $data['mdOrder']   = $this->getTransactionReference();
-        $data['bindingId'] = $this->getBindingId();
-        $data['language']  = $this->getLanguage();
-        $data['cvc']       = 615;
+        $data['CardHolderID'] = $this->getCardHolderId();
+        if ($this->getCurrency()) {
+            $data['Currency'] = str_pad($this->getCurrencyNumeric(), 3, 0, STR_PAD_LEFT);
+        }
+        $data['Description'] = $this->getDescription();
+        $data['OrderId']     = $this->getTransactionId();
+        $data['Amount']      = $this->getAmountInteger();
+        $data['BackURL']     = $this->getReturnUrl();
+        if ($this->getJsonParams()) {
+            $data['Opaque'] = $this->getJsonParams();
+        }
 
         return $data;
     }
@@ -32,31 +40,13 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
     /**
      * @return string
      */
-    public function getBindingId(): string
-    {
-        return $this->getParameter('bindingId');
-    }
-
-    /**
-     * @param  string  $value
-     *
-     * @return \Omnipay\Ameria\Message\BindingPaymentRequest
-     */
-    public function setBindingId(string $value): BindingPaymentRequest
-    {
-        return $this->setParameter('bindingId', $value);
-    }
-
-    /**
-     * @return string
-     */
     public function getEndpoint(): string
     {
-        return $this->getUrl().'/paymentOrderBinding.do';
+        return $this->getUrl().'/MakeBindingPayment';
     }
 
-    protected function createResponse(string $data, array $headers = []): BindingPaymentResponse
+    protected function createResponse(string $data, array $headers = []): AbstractResponse
     {
-        return $this->response = new BindingPaymentResponse($this, $data, $headers);
+        return $this->response = new GetPaymentDetailsResponse($this, $data, $headers);
     }
 }

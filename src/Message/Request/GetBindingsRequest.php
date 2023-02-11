@@ -2,6 +2,10 @@
 
 namespace Omnipay\Ameria\Message\Request;
 
+use Omnipay\Ameria\Message\Response\AbstractResponse;
+use Omnipay\Ameria\Message\Response\BindingsResponse;
+use Omnipay\Ameria\Message\Response\GetPaymentDetailsResponse;
+
 class GetBindingsRequest extends AbstractBindingAwareRequest
 {
     /**
@@ -12,9 +16,9 @@ class GetBindingsRequest extends AbstractBindingAwareRequest
      */
     public function getData(): array
     {
-        $data             = parent::getData();
-        $data['userName'] = $this->getUsername();
-        $data['clientId'] = $this->getClientId();
+        $data                = parent::getData();
+        $data['Username']    = $this->getUsername();
+        $data['PaymentType'] = 6; //Binding
 
         return $data;
     }
@@ -24,6 +28,11 @@ class GetBindingsRequest extends AbstractBindingAwareRequest
      */
     public function getEndpoint(): string
     {
-        return $this->getUrl().'/getBindings.do';
+        return $this->getUrl().'/GetBindings';
+    }
+
+    protected function createResponse(string $data, array $headers = []): AbstractResponse
+    {
+        return $this->response = new BindingsResponse($this, $data, $headers);
     }
 }
