@@ -47,14 +47,14 @@ Or you can simply run
     $gateway->setPassword(env('AMERIA_PASSWORD')); // Password - Provided by bank
     $purchase = $gateway->purchase(); // Creating purchase request
     $purchase->setReturnUrl(env('AMERIA_RETURN_URL')); // Return url, that should be point to your arca webhook route
-    $purchase->setAmount(10); // Amount to charge - should be decimal
+    $purchase->setAmount(10); // Amount to charge - should be decimal - use only 10 AMD if you are in test mode
     $purchase->setTransactionId(XXXX); // Transaction ID from your system
     $purchase->setTestMode(true); // For enabling test mode
     $purchase->setOpaque(json_encode(['email' => 'user@example.com'])); // Is not mandatory field and used as additional information during information exchange 
 
 ```
 
-3. Call purchase, it will automatically redirect to AmeriaBank's hosted page
+3. Call send, check if request is successful and redirect to AmeriaBank's hosted page
 
 ```php
 
