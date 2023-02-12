@@ -21,7 +21,7 @@ class InitPaymentResponse extends AbstractResponse
     public function getRedirectUrl(): string
     {
         return $this->getEndpoint().'?'.http_build_query([
-                'id'   => $this->data['PaymentId'],
+                'id'   => $this->data['PaymentID'],
                 'lang' => $this->getLanguage(),
             ]);
     }
