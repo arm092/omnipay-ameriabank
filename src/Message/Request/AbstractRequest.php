@@ -171,7 +171,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
             'Content-Type' => 'application/json',
         ];
 
-        $body = $data ? http_build_query($data, '', '&') : null;
+        $body = $data ? json_encode($data) : null;
 
         $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpoint(), $headers, $body);
 
