@@ -15,7 +15,7 @@ class InitPaymentRequest extends AbstractRequest
     /**
      * Get the request sessionTimeoutSecs.
      */
-    public function getTimeout(): int
+    public function getTimeout(): ?int
     {
         return $this->getParameter('sessionTimeoutSecs');
     }
