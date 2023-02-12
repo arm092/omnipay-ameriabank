@@ -12,8 +12,8 @@ namespace Omnipay\Ameria\Message\Response;
 class InitPaymentResponse extends AbstractResponse
 {
     public const NO_ERROR = 1;
-    protected string $endpoint     = 'https://services.ameriabank.am/VPOS';
-    protected string $testEndpoint = 'https://servicestest.ameriabank.am/VPOS';
+    protected string $endpoint     = 'https://services.ameriabank.am/VPOS/Payments';
+    protected string $testEndpoint = 'https://servicestest.ameriabank.am/VPOS/Payments';
 
     /**
      * Get response redirect url
