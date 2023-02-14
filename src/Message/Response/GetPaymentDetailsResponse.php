@@ -20,7 +20,7 @@ class GetPaymentDetailsResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return $this->data['orderID'] ?? $this->data['OrderID'] ?? $this->data['rrn'] ?? null;
+        return $this->data['orderID'] ?? $this->data['OrderID'] ?? null;
     }
 
     /**
@@ -28,7 +28,7 @@ class GetPaymentDetailsResponse extends AbstractResponse
      */
     public function getOrderNumberReference(): ?string
     {
-        return $this->data['MDOrderID'] ?? null;
+        return $this->data['MDOrderID'] ?? $this->data['rrn'] ?? null;
     }
 
     /**

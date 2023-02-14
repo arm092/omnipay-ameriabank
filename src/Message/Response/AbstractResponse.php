@@ -34,7 +34,6 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
     {
         return $this->data['ResponseMessage']
             ?? $this->data['Description']
-            ?? $this->data['TrxnDescription']
             ?? null;
     }
 

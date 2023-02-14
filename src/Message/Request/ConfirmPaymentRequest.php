@@ -20,10 +20,7 @@ class ConfirmPaymentRequest extends AbstractRequest
         $data = [];
 
         $data['PaymentID'] = $this->getTransactionId();
-
-        if ($this->getAmount()) {
-            $data['Amount'] = $this->getAmount();
-        }
+        $data['Amount']    = $this->getAmount();
 
         return $data;
     }
