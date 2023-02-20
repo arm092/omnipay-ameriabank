@@ -10,7 +10,7 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
 {
     public const NO_ERROR   = '00';
     public const DEPOSITED  = 2;
-    public const AUTHORIZED = 5;
+    public const AUTHORIZED = 1;
     protected ?string $requestId = null;
     protected array   $headers   = [];
 
