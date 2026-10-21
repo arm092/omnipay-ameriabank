@@ -3,7 +3,7 @@
 namespace Omnipay\Ameria\Message\Request;
 
 use Omnipay\Ameria\Message\Response\AbstractResponse;
-use Omnipay\Ameria\Message\Response\GetPaymentDetailsResponse;
+use Omnipay\Ameria\Message\Response\BindingPaymentResponse;
 
 /**
  * @package Omnipay\Ameria\Message\Request
@@ -20,6 +20,7 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
      */
     public function getData(): array
     {
+        $this->validate('card_holder_id', 'transactionId', 'amount');
         $data = parent::getData();
 
         $data['CardHolderID'] = $this->getCardHolderId();
@@ -27,8 +28,8 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
             $data['Currency'] = str_pad($this->getCurrencyNumeric(), 3, 0, STR_PAD_LEFT);
         }
         $data['Description'] = $this->getDescription();
-        $data['OrderId']     = $this->getTransactionId();
-        $data['Amount']      = $this->getAmountInteger();
+        $data['OrderID']     = $this->getTransactionId();
+        $data['Amount']      = $this->getAmount();
         $data['BackURL']     = $this->getReturnUrl();
         if ($this->getOpaque()) {
             $data['Opaque'] = $this->getOpaque();
@@ -47,6 +48,6 @@ class BindingPaymentRequest extends AbstractBindingAwareRequest
 
     protected function createResponse(string $data, array $headers = []): AbstractResponse
     {
-        return $this->response = new GetPaymentDetailsResponse($this, $data, $headers);
+        return $this->response = new BindingPaymentResponse($this, $data, $headers);
     }
 }

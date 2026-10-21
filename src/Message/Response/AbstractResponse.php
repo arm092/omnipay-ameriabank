@@ -19,7 +19,11 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
         parent::__construct($request, $data);
 
         $this->request = $request;
-        $this->data    = json_decode($data, true);
+        $decoded = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        if (!is_array($decoded)) {
+            throw new \UnexpectedValueException('Ameriabank returned a non-object JSON response.');
+        }
+        $this->data    = $decoded;
         $this->headers = $headers;
     }
 
@@ -50,6 +54,18 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
         return $this->data['Opaque'] ?? null;
     }
 
+    public function getTransactionReference(): ?string
+    {
+        return $this->data['PaymentID'] ?? $this->request->getPaymentId();
+    }
+
+    public function getTransactionId(): ?string
+    {
+        $value = $this->data['OrderID'] ?? $this->data['orderID'] ?? null;
+
+        return $value === null ? null : (string) $value;
+    }
+
     /**
      * Is the transaction successful
      *
@@ -77,6 +93,6 @@ abstract class AbstractResponse extends OmnipayAbstractResponse implements Redir
      */
     public function isCompleted(): bool
     {
-        return $this->getOrderStatus() == self::DEPOSITED;
+        return method_exists($this, 'getOrderStatus') && $this->getOrderStatus() === self::DEPOSITED;
     }
 }

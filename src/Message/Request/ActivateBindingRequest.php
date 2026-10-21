@@ -17,6 +17,7 @@ class ActivateBindingRequest extends AbstractBindingAwareRequest
      */
     public function getData(): array
     {
+        $this->validate('card_holder_id');
         $data                 = parent::getData();
         $data['CardHolderID'] = $this->getCardHolderId();
 

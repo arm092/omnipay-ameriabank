@@ -5,6 +5,7 @@ namespace Omnipay\Ameria\Message\Request;
 use Omnipay\Ameria\Message\Response\CommonResponse;
 use Omnipay\Common\Message\AbstractRequest as CommonAbstractRequest;
 use Omnipay\Common\Message\ResponseInterface;
+use Omnipay\Common\Exception\InvalidRequestException;
 
 /**
  * Class AbstractRequest
@@ -111,6 +112,30 @@ abstract class AbstractRequest extends CommonAbstractRequest
 
     abstract public function getEndpoint();
 
+    public function getPaymentId(): ?string
+    {
+        $value = $this->getTransactionReference() ?: $this->getTransactionId();
+
+        return $value === null ? null : (string) $value;
+    }
+
+    protected function validatePaymentId(): void
+    {
+        if ($this->getPaymentId() === null || $this->getPaymentId() === '') {
+            throw new InvalidRequestException('The transactionReference parameter is required (bank PaymentID).');
+        }
+    }
+
+    public function getCardHolderId(): ?string
+    {
+        return $this->getParameter('card_holder_id');
+    }
+
+    public function setCardHolderId(string $value): AbstractRequest
+    {
+        return $this->setParameter('card_holder_id', $value);
+    }
+
     /**
      * Get url. Depends on  test mode.
      *
@@ -171,7 +196,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
             'Content-Type' => 'application/json',
         ];
 
-        $body = $data ? json_encode($data) : null;
+        $body = $data ? json_encode($data, JSON_THROW_ON_ERROR) : null;
 
         $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpoint(), $headers, $body);
 
@@ -195,10 +220,16 @@ abstract class AbstractRequest extends CommonAbstractRequest
      */
     public function getData(): array
     {
-        $this->validate('client_id', 'username', 'password');
+        $this->validate('client_id');
+
+        return ['ClientID' => $this->getClientId()] + $this->getAuthenticationData();
+    }
+
+    protected function getAuthenticationData(): array
+    {
+        $this->validate('username', 'password');
 
         return [
-            'ClientID' => $this->getClientId(),
             'Username' => $this->getUsername(),
             'Password' => $this->getPassword(),
         ];

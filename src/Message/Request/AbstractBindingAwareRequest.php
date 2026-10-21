@@ -20,26 +20,4 @@ abstract class AbstractBindingAwareRequest extends AbstractRequest
 
         return $data;
     }
-
-    /**
-     * Unique ID for binding transactions (is used when needs to do card binding, in other cases it is not required)
-     *
-     * @return string
-     */
-    public function getCardHolderId(): string
-    {
-        return $this->getParameter('card_holder_id');
-    }
-
-    /**
-     * Set the unique id for card holder
-     *
-     * @param  string  $value
-     *
-     * @return $this
-     */
-    public function setCardHolderId(string $value): AbstractRequest
-    {
-        return $this->setParameter('card_holder_id', $value);
-    }
 }

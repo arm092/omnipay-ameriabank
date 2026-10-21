@@ -18,8 +18,11 @@ class InitPaymentResponse extends AbstractResponse
     /**
      * Get response redirect url
      */
-    public function getRedirectUrl(): string
+    public function getRedirectUrl(): ?string
     {
+        if (!$this->isRedirect()) {
+            return null;
+        }
         return $this->getEndpoint().'?'.http_build_query([
                 'id'   => $this->data['PaymentID'],
                 'lang' => $this->getLanguage(),
@@ -54,7 +57,7 @@ class InitPaymentResponse extends AbstractResponse
      */
     public function getTestMode(): bool
     {
-        return $this->data['TestMode'] ?? false;
+        return $this->data['TestMode'] ?? $this->request->getTestMode();
     }
 
     /**
@@ -81,11 +84,22 @@ class InitPaymentResponse extends AbstractResponse
      */
     public function isNotError(): bool
     {
-        return isset($this->data['PaymentID']) && $this->getCode() == static::NO_ERROR;
+        return !empty($this->data['PaymentID']) && $this->getCode() === (string) static::NO_ERROR;
     }
 
     public function isRedirect(): bool
     {
-        return true;
+        return $this->isNotError();
+    }
+
+    public function isSuccessful(): bool
+    {
+        // Registration is not a completed payment. Verify it with GetPaymentDetails.
+        return false;
+    }
+
+    public function getTransactionReference(): ?string
+    {
+        return $this->data['PaymentID'] ?? null;
     }
 }

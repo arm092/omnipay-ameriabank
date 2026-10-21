@@ -14,16 +14,6 @@ class GetPaymentDetailsResponse extends AbstractResponse
     public const NO_ERROR = '00';
 
     /**
-     * Get the Unique ID|code of the transaction
-     *
-     * @return null|int|string
-     */
-    public function getTransactionReference()
-    {
-        return $this->data['orderID'] ?? $this->data['OrderID'] ?? null;
-    }
-
-    /**
      * Get the Payment system identifier
      */
     public function getOrderNumberReference(): ?string
@@ -84,7 +74,7 @@ class GetPaymentDetailsResponse extends AbstractResponse
      */
     public function isAuthorized(): bool
     {
-        return $this->getOrderStatus() == self::AUTHORIZED;
+        return $this->isNotError() && $this->getOrderStatus() === self::AUTHORIZED;
     }
 
     public function getRequestId(): ?string

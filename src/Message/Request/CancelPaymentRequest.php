@@ -16,10 +16,10 @@ class CancelPaymentRequest extends AbstractRequest
      */
     public function getData(): array
     {
-        $this->validate('transactionId');
+        $this->validatePaymentId();
 
-        $data              = parent::getData();
-        $data['PaymentID'] = $this->getTransactionId();
+        $data              = $this->getAuthenticationData();
+        $data['PaymentID'] = $this->getPaymentId();
 
         return $data;
     }

@@ -19,9 +19,9 @@ class GetPaymentDetailsRequest extends AbstractRequest
      */
     public function getData(): array
     {
-        $this->validate('transactionId');
-        $data              = parent::getData();
-        $data['PaymentID'] = $this->getTransactionId();
+        $this->validatePaymentId();
+        $data              = $this->getAuthenticationData();
+        $data['PaymentID'] = $this->getPaymentId();
 
         return $data;
     }

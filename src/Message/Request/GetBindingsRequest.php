@@ -17,7 +17,6 @@ class GetBindingsRequest extends AbstractBindingAwareRequest
     public function getData(): array
     {
         $data                = parent::getData();
-        $data['Username']    = $this->getUsername();
         $data['PaymentType'] = 6; //Binding
 
         return $data;

@@ -33,6 +33,18 @@
         "php": "^7.4|8.*"
     },
     "require-dev": {
-        "omnipay/tests": "^v4.0.0"
+        "omnipay/tests": "^v4.0.0",
+        "phpunit/phpunit": "^9.6"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.33"
+        },
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    },
+    "scripts": {
+        "test": "phpunit --configuration phpunit.xml.dist"
     }
 }

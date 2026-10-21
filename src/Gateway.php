@@ -152,11 +152,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Create RegisterPreAuth Request.
+     * Register a payment on a terminal configured by the bank for preauthorization.
      */
     public function authorize(array $options = []): AbstractRequest
     {
         return $this->createRequest(InitPaymentRequest::class, $options);
+    }
+
+    public function completeAuthorize(array $options = []): AbstractRequest
+    {
+        return $this->getPaymentDetails($options);
     }
 
     /**

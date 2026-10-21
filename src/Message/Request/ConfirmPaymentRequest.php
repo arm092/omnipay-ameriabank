@@ -15,11 +15,12 @@ class ConfirmPaymentRequest extends AbstractRequest
      */
     public function getData(): array
     {
-        $this->validate('transactionId', 'amount');
+        $this->validatePaymentId();
+        $this->validate('amount');
 
-        $data = [];
+        $data = $this->getAuthenticationData();
 
-        $data['PaymentID'] = $this->getTransactionId();
+        $data['PaymentID'] = $this->getPaymentId();
         $data['Amount']    = $this->getAmount();
 
         return $data;
