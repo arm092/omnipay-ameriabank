@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.1
+
+- Include the Guzzle HTTP adapter as a runtime dependency, so installing the
+  gateway alone is sufficient to create the default HTTP client.
+- Run payment tests in GitHub Actions on PHP 7.4 and PHP 8.0 through 8.4.
+- Add live test status, Packagist version, download count, PHP and license badges.
+
 ## 2.0.0
 
 ### Migration from 1.x

@@ -1,13 +1,19 @@
 # Omnipay: Ameriabank
 
+[![Tests](https://github.com/arm092/omnipay-ameriabank/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/arm092/omnipay-ameriabank/actions/workflows/tests.yml)
+[![Latest Stable Version](https://img.shields.io/packagist/v/arm092/omnipay-ameriabank)](https://packagist.org/packages/arm092/omnipay-ameriabank)
+[![Total Downloads](https://img.shields.io/packagist/dt/arm092/omnipay-ameriabank)](https://packagist.org/packages/arm092/omnipay-ameriabank/stats)
+[![PHP Version](https://img.shields.io/packagist/dependency-v/arm092/omnipay-ameriabank/php)](https://packagist.org/packages/arm092/omnipay-ameriabank)
+[![License](https://img.shields.io/packagist/l/arm092/omnipay-ameriabank)](https://packagist.org/packages/arm092/omnipay-ameriabank)
+
 Ameriabank VPOS gateway for Omnipay, compatible with PHP 7.4 and PHP 8.
 
 ## Installation
 
-Install the gateway and an HTTP adapter (or inject an existing compatible client):
+Install the gateway; the Guzzle HTTP adapter is included as a dependency:
 
 ```sh
-composer require arm092/omnipay-ameriabank:^2.0 php-http/guzzle7-adapter
+composer require arm092/omnipay-ameriabank:^2.0
 ```
 
 ## Register a payment and redirect
